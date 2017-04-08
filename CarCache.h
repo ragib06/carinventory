@@ -6,7 +6,7 @@
 //  Copyright © 2017 Ragib Ahsan. All rights reserved.
 //
 
-#include "CarPtr.h"
+#include "Car.h"
 
 #ifndef CarCache_hpp
 #define CarCache_hpp
@@ -14,12 +14,16 @@
 class CarCache {
 private:
     int _count;
-    const int _size;
-    CarPtr* _cache;
+    int _next;
+    int _size;
+    Car* _cache;
 public:
     CarCache();
     CarCache(int cacheSize);
     ~CarCache();
+    
+    Car* findByID(int carID);
+    void cacheCar(Car& car);
 };
 
 #endif /* CarCache_hpp */

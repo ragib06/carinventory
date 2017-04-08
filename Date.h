@@ -20,7 +20,10 @@ private:
 public:
     Date();
     Date(int month, int day, int year);
+    
     String date();
+    String toString();
+    static Date fromString(String dateString);
 };
 
 #endif /* Date_hpp */

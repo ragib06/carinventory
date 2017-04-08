@@ -16,7 +16,7 @@ String::String() {
 }
 
 
-String::String(char* str) {
+String::String(const char* str) {
     if(str == NULL) {
         return;
     }
@@ -55,12 +55,35 @@ char* String::string() const{
     return _string;
 }
 
+int String::toInt() const {
+    return atoi(_string);
+}
+
+
+double String::toDouble() const {
+    return atof(_string);
+}
+
 size_t String::size() const {
     if(_string == NULL) {
         return 0;
     }
         
     return strlen(_string);
+}
+
+vector<String*> String::tokenize(const char* delimeter) {
+    
+    vector<String*> tokens;
+    char * str = _string;
+    char *token = strtok(str, delimeter);
+    
+    while(token != NULL) {
+        tokens.push_back(new String(token));
+        token = strtok(NULL, delimeter);
+    }
+    
+    return tokens;
 }
 
 //operator overlaoding
@@ -70,6 +93,16 @@ String& String::operator=(const String& rhs) {
     _size = rhs.size();
     _string = new char[_size + 1];
     strcpy(_string, rhs.string());
+    
+    return *this;
+}
+
+String& String::operator=(const char* str) {
+    delete[] _string;
+    
+    _size = strlen(str);
+    _string = new char[_size + 1];
+    strcpy(_string, str);
     
     return *this;
 }
@@ -84,6 +117,19 @@ String& String::operator+(const String& rhs) {
     char* temp = new char[_size + rhs.size() + 1];
     strcpy(temp, _string);
     strcat(temp, rhs.string());
+    
+    return *(new String(temp));
+}
+
+String& String::operator+(const char* str) {
+    
+    if(_size == 0) {
+        return *(new String(str));
+    }
+    
+    char* temp = new char[_size + strlen(str) + 1];
+    strcpy(temp, _string);
+    strcat(temp, str);
     
     return *(new String(temp));
 }

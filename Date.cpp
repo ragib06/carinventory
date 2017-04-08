@@ -6,8 +6,10 @@
 //  Copyright © 2017 Ragib Ahsan. All rights reserved.
 //
 
-#include <iostream>
 #include "Date.h"
+#include <iostream>
+#include <cstdio>
+
 
 Date::Date() {
     _day = 1;
@@ -23,4 +25,20 @@ String Date::date() {
     String _date;
     
     return _date;
+}
+
+
+String Date::toString() {
+    
+    char buffer[10];
+    sprintf(buffer, "%d/%d/%d", _month, _day, _year);
+    
+    return String(buffer);
+}
+
+Date Date::fromString(String dateString) {
+    int m, d, y;
+    sscanf(dateString.string(), "%d/%d/%d", &m, &d, &y);
+    
+    return Date(m, d, y);
 }

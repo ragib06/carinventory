@@ -19,11 +19,12 @@ private:
     int _selection;
 public:
     Inventory();
-    void CreateCar();
+    bool CreateCar();
     void ListCars();
     bool SelectCar(int index);
     bool ChangeCost(double newCost);
     void SaveAll();
+    void Prompt();
 };
 
 #endif /* Inventory_hpp */
