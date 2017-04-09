@@ -9,8 +9,6 @@
 #include "Car.h"
 #include <cstdlib>
 #include <cstdio>
-#include <vector>
-using namespace std;
 
 Car::Car() : _year(1970), _cost(0.0), _make(NULL), _model(NULL), _picture(NULL){
     

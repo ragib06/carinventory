@@ -8,8 +8,6 @@
 
 #include "CarPtr.h"
 #include <cstdlib>
-#include <iostream>
-using namespace std;
 
 unsigned int CarPtr::nextId = 1;
 const size_t CarPtr::CACHE_SIZE = 2;

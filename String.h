@@ -8,8 +8,6 @@
 
 #include <cstdlib>
 #include <cstring>
-#include <vector>
-using namespace std;
 
 #ifndef String_hpp
 #define String_hpp
