@@ -28,13 +28,14 @@ public:
     int toInt() const;
     double toDouble() const;
     size_t size() const;
-    vector<String*> tokenize(const char* delimeter);
+    int tokenCount(const char* delimeter);
+    void tokenize(const char* delimeter, String** tokens, int numTokens);
     
     String& operator=(const String& rhs);
     String& operator=(const char* str);
     
-    String& operator+(const String& rhs);
-    String& operator+(const char* str);
+    String operator+(const String& rhs);
+    String operator+(const char* str);
     
     String& operator+=(const String& rhs);
 };

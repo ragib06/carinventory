@@ -15,9 +15,11 @@
 //#include "CarFile.h"
 using namespace std;
 
+void test();
 
 int main(int argc, const char * argv[]) {
     
+//    test();
     
     Inventory VCS;
     
@@ -26,21 +28,40 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
-
+String foo() {
+    String res;
+    res = "hihi";
+    return res;
+}
 
 
 
 void test() {
-    String s1;
-    String s2("hi");
-    String s3(s2);
-    String s4("hello");
-    String s5(" ");
-    String s6 = "hey";
-    String s7 = s4 + " " + "hey" + s2;
-    String s8 = "my,name,is,khan";
     
-    Date d(4, 6, 2017);
+    String str = foo();
+    
+    cout << "str: " << str.string() << endl;
+
+    String sa1 = "";
+    String sa2 = "hi";
+    String sa3 = "hello";
+    String sa4 = "bye";
+    String nl = "\n";
+    sa1 += sa2 + "\n";
+    sa1 += sa3 + "\n";
+    sa1 += sa4 + "\n";
+    
+    cout << sa1.string() << endl;
+    
+    
+//    String s1;
+//    String s2("hi");
+//    String s3(s2);
+//    String s4("hello");
+//    String s5(" ");
+//    String s6 = "hey";
+    
+//    Date d(4, 6, 2017);
     
     //    cout << "s1: " << s1.string() << endl;
     //    cout << "s2: " << s2.string() << endl;
@@ -49,7 +70,7 @@ void test() {
     //    s2 += s5 + s4;
     //    cout << "s2: " << s2.string() << endl;
     //    cout << "s6: " << s6.string() << endl;
-    //    cout << "s7: " << s7.string() << endl;
+//        cout << "s7: " << s7.string() << endl;
     
     
     

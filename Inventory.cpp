@@ -21,7 +21,11 @@ bool Inventory::CreateCar() {
     
     //TODO: proper intialisation
     
-    _container[_count++].initCar(1972, Date(4, 6, 2017), 2000.0, new String("Audi"), new String("A6"), new String("Car1.jpg"));
+    String make("Audi");
+    String model("A6");
+    String picture("Car1.jpg");
+    
+    _container[_count++].initCar(1972, Date(4, 6, 2017), 2000.0, &make, &model, &picture);
     
     return true;
 }

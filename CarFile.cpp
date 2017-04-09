@@ -24,7 +24,7 @@ CarFile::~CarFile() {
 
 Car* CarFile::LoadCarFromFile() {
     char buffer[256] = "";
-    char linebuf[40];
+    char linebuf[80];
     
     _ifs.open (_filename.string(), ifstream::in);
     

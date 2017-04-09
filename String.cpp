@@ -7,6 +7,8 @@
 //
 
 #include "String.h"
+#include <iostream>
+using namespace std;
 
 
 //Constructors
@@ -29,6 +31,8 @@ String::String(const char* str) {
 
 String::String(const String& str) {
     
+//    cout << "String copy constructor called: " << str.string() << endl;
+    
     if(str.size() == 0) {
         return;
     }
@@ -45,6 +49,8 @@ String::~String() {
     if(_string != NULL) {
         delete _string;
     }
+    
+//    cout << "Destructor called!" << endl;
 }
 
 //Member functions
@@ -72,22 +78,36 @@ size_t String::size() const {
     return strlen(_string);
 }
 
-vector<String*> String::tokenize(const char* delimeter) {
-    
-    vector<String*> tokens;
-    char * str = _string;
-    char *token = strtok(str, delimeter);
+int String::tokenCount(const char* delimeter) {
+    int count = 0;
+    String temp(_string);
+    char *token = strtok(temp.string(), delimeter);
     
     while(token != NULL) {
-        tokens.push_back(new String(token));
+        count++;
         token = strtok(NULL, delimeter);
     }
     
-    return tokens;
+    return count;
+}
+
+void String::tokenize(const char* delimeter, String** tokens, int numTokens) {
+    
+    String temp(_string);
+    char *token = strtok(temp.string(), delimeter);
+    
+    int i = 0;
+    while(token != NULL && i < numTokens) {
+        tokens[i++] = new String(token);
+        token = strtok(NULL, delimeter);
+    }
 }
 
 //operator overlaoding
 String& String::operator=(const String& rhs) {
+    
+//    cout << "String = const String& called: " << rhs.string() << endl;
+    
     delete[] _string;
     
     _size = rhs.size();
@@ -98,6 +118,9 @@ String& String::operator=(const String& rhs) {
 }
 
 String& String::operator=(const char* str) {
+    
+//    cout << "String = const char* called: " << str << endl;
+    
     delete[] _string;
     
     _size = strlen(str);
@@ -108,30 +131,58 @@ String& String::operator=(const char* str) {
 }
 
 
-String& String::operator+(const String& rhs) {
+String String::operator+(const String& rhs) {
+    
+//    cout << "String + const String& called: " << rhs.string() << endl;
     
     if(_size == 0) {
-        return *(new String(rhs));
+        return String(rhs);
     }
     
     char* temp = new char[_size + rhs.size() + 1];
     strcpy(temp, _string);
     strcat(temp, rhs.string());
     
-    return *(new String(temp));
+    String res(temp);
+    
+    delete[] temp;
+    
+    return res;
 }
 
-String& String::operator+(const char* str) {
+//String& String::operator+(const char* str) {
+//    
+//    cout << "String + const char* called!" << endl;
+//    
+//    if(_size == 0) {
+//        return *(new String(str));
+//    }
+//    
+//    char* temp = new char[_size + strlen(str) + 1];
+//    strcpy(temp, _string);
+//    strcat(temp, str);
+//    
+//    return *(new String(temp));
+//}
+
+String String::operator+(const char* str) {
+    
+//    cout << "String + const char* called: " << str << endl;
     
     if(_size == 0) {
-        return *(new String(str));
+        String res = str;
+        return res;
     }
     
     char* temp = new char[_size + strlen(str) + 1];
     strcpy(temp, _string);
     strcat(temp, str);
     
-    return *(new String(temp));
+    String res = String(temp);
+    
+    delete[] temp;
+    
+    return res;
 }
 
 String& String::operator+=(const String& rhs) {
@@ -146,6 +197,8 @@ String& String::operator+=(const String& rhs) {
     
     if(_size != 0) {
         strcpy(temp, _string);
+    } else {
+        strcpy(temp, "");
     }
     
     if(rhs.size() != 0) {

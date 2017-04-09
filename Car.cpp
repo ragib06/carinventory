@@ -17,7 +17,11 @@ Car::Car() : _year(1970), _cost(0.0), _make(NULL), _model(NULL), _picture(NULL){
 }
 
 Car::Car(int cid, int year, Date date, double cost, String *make, String *model, String *picture) :
-_id(cid), _year(year), _date(date), _cost(cost), _make(make), _model(model), _picture(picture) {
+_id(cid), _year(year), _date(date), _cost(cost) {
+    
+    _make = new String(*make);
+    _model = new String(*model);
+    _picture = new String(*picture);
     
 }
 
@@ -81,34 +85,37 @@ String Car::picture() const{
 
 
 String Car::toString() {
-    String str = "";
+    String str;
+    str = "";
     
     char buffer[10];
     
     sprintf(buffer, "%d", _id);
-    str += String(buffer) + "\n";
+    str = str + buffer + "\n";
     
     sprintf(buffer, "%d", _year);
-    str += String(buffer) + "\n";
+    str = str + buffer + "\n";
     
-    str += _date.toString() + "\n";
+    str = str + _date.toString() + "\n";
     
     sprintf(buffer, "%.2lf", _cost);
-    str += String(buffer) + "\n";
+    str = str + buffer + "\n";
     
-    str += *_make + "\n";
+    str = str + *_make + "\n";
     
-    str += *_model + "\n";
+    str = str + *_model + "\n";
     
-    str += *_picture;
+    str = str + *_picture;
     
     return str;
 }
 
 Car* Car::fromString(String carString) {
-    vector<String*> tokens = carString.tokenize("\n");
+    int numTokens = carString.tokenCount("\n");
+    String** tokens = new String*[numTokens];
+    carString.tokenize("\n", tokens, numTokens);
     
-    if(tokens.size() != 7) {
+    if(numTokens != 7) {
         return NULL;
     }
     
@@ -121,6 +128,13 @@ Car* Car::fromString(String carString) {
     Date date = Date::fromString(*tokens[2]);
     sscanf(tokens[3]->string(), "%lf", &cost);
     
+    Car* car = new Car(cid, year, date, cost, tokens[4], tokens[5], tokens[6]);
+    
+    for(int i = 0; i < numTokens; i++) {
+        delete tokens[i];
+    }
+    
+    delete[] tokens;
 
-    return new Car(cid, year, date, cost, tokens[4], tokens[5], tokens[6]);
+    return car;
 }
