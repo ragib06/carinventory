@@ -11,7 +11,7 @@
 using namespace std;
 
 
-//Constructors
+/* ----------------- Constructors ------------------*/
 String::String() {
     _string = NULL;
     _size = 0;
@@ -31,8 +31,6 @@ String::String(const char* str) {
 
 String::String(const String& str) {
     
-//    cout << "String copy constructor called: " << str.string() << endl;
-    
     if(str.size() == 0) {
         return;
     }
@@ -44,20 +42,17 @@ String::String(const String& str) {
 
 
 
-//Destructors
+/* ----------------- Destructor ------------------*/
 String::~String() {
     if(_string != NULL) {
         delete _string;
     }
-    
-//    cout << "Destructor called!" << endl;
 }
 
-//Member functions
+
+
+/* ----------------- Member functions ------------------*/
 char* String::string() const{
-    if(_string == NULL) {
-        return "";
-    }
     return _string;
 }
 
@@ -80,6 +75,7 @@ size_t String::size() const {
 
 int String::tokenCount(const char* delimeter) {
     int count = 0;
+    
     String temp(_string);
     char *token = strtok(temp.string(), delimeter);
     
@@ -103,10 +99,14 @@ void String::tokenize(const char* delimeter, String** tokens, int numTokens) {
     }
 }
 
-//operator overlaoding
+
+
+/* ----------------- Operator Overloading ------------------*/
 String& String::operator=(const String& rhs) {
     
-//    cout << "String = const String& called: " << rhs.string() << endl;
+    if(this == &rhs) {
+        return *this;
+    }
     
     delete[] _string;
     
@@ -119,8 +119,6 @@ String& String::operator=(const String& rhs) {
 
 String& String::operator=(const char* str) {
     
-//    cout << "String = const char* called: " << str << endl;
-    
     delete[] _string;
     
     _size = strlen(str);
@@ -132,8 +130,6 @@ String& String::operator=(const char* str) {
 
 
 String String::operator+(const String& rhs) {
-    
-//    cout << "String + const String& called: " << rhs.string() << endl;
     
     if(_size == 0) {
         return String(rhs);
@@ -150,28 +146,10 @@ String String::operator+(const String& rhs) {
     return res;
 }
 
-//String& String::operator+(const char* str) {
-//    
-//    cout << "String + const char* called!" << endl;
-//    
-//    if(_size == 0) {
-//        return *(new String(str));
-//    }
-//    
-//    char* temp = new char[_size + strlen(str) + 1];
-//    strcpy(temp, _string);
-//    strcat(temp, str);
-//    
-//    return *(new String(temp));
-//}
-
 String String::operator+(const char* str) {
     
-//    cout << "String + const char* called: " << str << endl;
-    
     if(_size == 0) {
-        String res = str;
-        return res;
+        return String(str);
     }
     
     char* temp = new char[_size + strlen(str) + 1];
@@ -204,7 +182,6 @@ String& String::operator+=(const String& rhs) {
     if(rhs.size() != 0) {
         strcat(temp, rhs.string());
     }
-    
     
     _size = temp_size;
     delete[] _string;

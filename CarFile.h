@@ -18,17 +18,15 @@ using namespace std;
 
 class CarFile {
 private:
-//    Car* _car;
     ifstream _ifs;
     ofstream _ofs;
     String _filename;
 public:
     CarFile();
     CarFile(String filename);
-    ~CarFile();
     
-    Car* LoadCarFromFile();
-    void StoreCarToFile(Car* car);
+    Car* loadCarFromFile();
+    void storeCarToFile(Car* car);
 };
 
 #endif /* CarFile_hpp */

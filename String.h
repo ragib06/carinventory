@@ -28,6 +28,7 @@ public:
     int toInt() const;
     double toDouble() const;
     size_t size() const;
+    
     int tokenCount(const char* delimeter);
     void tokenize(const char* delimeter, String** tokens, int numTokens);
     

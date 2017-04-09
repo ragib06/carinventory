@@ -15,7 +15,6 @@
 
 class CarPtr {
 private:
-//    Car* _car;
     CarFile* _carfile;
     unsigned int _id;
     

@@ -22,6 +22,8 @@ CarCache::~CarCache() {
     delete[] _cache;
 }
 
+//Return car instance for car id carID, if found in cache
+//Return NULL otherwise
 Car* CarCache::findByID(int carID) {
     for(int i = 0; i < _count; i++) {
         if(_cache[i].cid() == carID) {
@@ -32,6 +34,7 @@ Car* CarCache::findByID(int carID) {
     return NULL;
 }
 
+//Cache the provided car instance
 void CarCache::cacheCar(Car& car) {
     
     if(_count == _size) {

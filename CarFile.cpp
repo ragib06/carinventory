@@ -9,7 +9,7 @@
 #include "CarFile.h"
 
 CarFile::CarFile() {
-    
+    //nothing to initialize
 }
 
 
@@ -17,12 +17,8 @@ CarFile::CarFile(String filename) {
     _filename = filename;
 }
 
-
-CarFile::~CarFile() {
-
-}
-
-Car* CarFile::LoadCarFromFile() {
+//Load and return car instance from file
+Car* CarFile::loadCarFromFile() {
     char buffer[256] = "";
     char linebuf[80];
     
@@ -38,7 +34,8 @@ Car* CarFile::LoadCarFromFile() {
     return Car::fromString(buffer);
 }
 
-void CarFile::StoreCarToFile(Car* car) {
+//store car instance into corresponding file
+void CarFile::storeCarToFile(Car* car) {
     
     if(car == NULL) {
         return;

@@ -83,7 +83,7 @@ String Car::picture() const{
     return *_picture;
 }
 
-
+//Return a string representation of the Car instance
 String Car::toString() {
     String str;
     str = "";
@@ -110,6 +110,7 @@ String Car::toString() {
     return str;
 }
 
+//Build a Car instance from a given string representation
 Car* Car::fromString(String carString) {
     int numTokens = carString.tokenCount("\n");
     String** tokens = new String*[numTokens];

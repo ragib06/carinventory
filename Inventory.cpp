@@ -19,13 +19,37 @@ bool Inventory::CreateCar() {
         return false;
     }
     
-    //TODO: proper intialisation
+    int year;
+    cout << "Enter year: ";
+    cin >> year;
     
-    String make("Audi");
-    String model("A6");
-    String picture("Car1.jpg");
+    int date_m, date_d, date_y;
+    cout << "Enter date(mm/dd/yy): ";
+    scanf("%d/%d/%d", &date_m, &date_d, &date_y);
+    Date date(date_m, date_d, date_y);
     
-    _container[_count++].initCar(1972, Date(4, 6, 2017), 2000.0, &make, &model, &picture);
+    double cost;
+    cout << "Enter price: ";
+    cin >> cost;
+    
+    char _make[40];
+    char _model[40];
+    char _picture[40];
+    
+    cout << "Enter make: ";
+    cin >> _make;
+    
+    cout << "Enter model: ";
+    cin >> _model;
+    
+    cout << "Enter picture: ";
+    cin >> _picture;
+    
+    String make(_make);
+    String model(_model);
+    String picture(_picture);
+    
+    _container[_count++].initCar(year, date, cost, &make, &model, &picture);
     
     return true;
 }

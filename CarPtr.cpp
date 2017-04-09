@@ -35,7 +35,7 @@ CarPtr::~CarPtr() {
     }
 }
 
-
+//Create car instance and immediately store into file
 void CarPtr::initCar(int year, Date date, double cost, String *make, String *model, String *picture) {
     
     _id = CarPtr::nextId++;
@@ -51,21 +51,30 @@ void CarPtr::initCar(int year, Date date, double cost, String *make, String *mod
     
     _carfile = new CarFile(filename);
     
-    _carfile->StoreCarToFile(_car);
+    _carfile->storeCarToFile(_car);
     
     delete _car;
 }
 
 
-
+//Get car instance from either cache or file
 Car* CarPtr::getCarInstance() const{
+    
+    //find car instance in cache
     Car* _car = cache->findByID(_id);
     
-    if(_car == NULL) {
-        _car = _carfile->LoadCarFromFile();
+    if(_car == NULL) {  //car instance not available in cache
+        
+        //load car isntance from file
+        _car = _carfile->loadCarFromFile();
+        
+        //cache the car instance
         cache->cacheCar(*_car);
+        
+        //erase the temporary copy
         delete _car;
         
+        //return cached copy
         return cache->findByID(_id);
     }
     
@@ -85,10 +94,12 @@ Car& CarPtr::operator*() const {
 
 
 void CarPtr::save() {
+    
+    //find car instance in cache
     Car* _car = cache->findByID(_id);
     
-    if(_car != NULL) {
-        _carfile->StoreCarToFile(_car);
+    if(_car != NULL) {  //car instance actually in memory/cache
+        _carfile->storeCarToFile(_car);
     }
 }
 

@@ -21,12 +21,6 @@ Date::Date(int month, int day, int year) : _month(month), _day(day), _year(year)
     
 }
 
-String Date::date() {
-    String _date;
-    
-    return _date;
-}
-
 
 String Date::toString() {
     
