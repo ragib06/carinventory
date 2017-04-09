@@ -94,6 +94,8 @@ void Inventory::SaveAll() {
     for(int i = 0; i < _count; i++) {
         _container[i].save();
     }
+    
+    cout << "All in-memory car instances are saved to disk!" << endl;
 }
 
 void Inventory::Prompt() {

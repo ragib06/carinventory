@@ -1,0 +1,48 @@
+>>c
+New car added to the inventory!
+>>c
+New car added to the inventory!
+>>l
+>> Total Cars: 2
+*** CACHE: add car 1 ***
+====================
+Car ID         : 1
+Car Year       : 2014
+Car Date       : 4/7/2017
+Car Cost       : 28000
+Car Make       : Audi
+Car Model      : A6
+Car Picture    : audia6.jpg
+*** CACHE: add car 2 ***
+====================
+Car ID         : 2
+Car Year       : 2016
+Car Date       : 4/2/2017
+Car Cost       : 15000
+Car Make       : BMW
+Car Model      : CC1
+Car Picture    : bmwcc1.jpg
+>>2
+Car index seleced: 2
+>>p
+Enter price: 15001
+>>s
+All in-memory car instances are saved to disk!
+>>l
+Total Cars: 2
+====================
+Car ID         : 1
+Car Year       : 2014
+Car Date       : 4/7/2017
+Car Cost       : 28000
+Car Make       : Audi
+Car Model      : A6
+Car Picture    : audia6.jpg
+====================
+Car ID         : 2
+Car Year       : 2016
+Car Date       : 4/2/2017
+Car Cost       : 15001
+Car Make       : BMW
+Car Model      : CC1
+Car Picture    : bmwcc1.jpg
