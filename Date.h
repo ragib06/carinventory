@@ -6,10 +6,11 @@
 //  Copyright © 2017 Ragib Ahsan. All rights reserved.
 //
 
+#include "String.h"
+#include <fstream>
+
 #ifndef Date_hpp
 #define Date_hpp
-
-#include "String.h"
 
 class Date {
 private:
@@ -21,8 +22,10 @@ public:
     Date();
     Date(int month, int day, int year);
     
-    String toString();
-    static Date fromString(String dateString);
+    friend std::ostream& operator<<(std::ostream& os, const Date& obj);
+    friend std::istream& operator>>(std::istream& is, Date& obj);
 };
+
+
 
 #endif /* Date_hpp */

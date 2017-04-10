@@ -11,6 +11,7 @@
 
 #include "String.h"
 #include "Date.h"
+#include <fstream>
 
 class Car {
 private:
@@ -39,9 +40,10 @@ public:
     String model() const;
     String picture() const;
     
-    String toString();
-    static Car* fromString(String carString);
-    
+    friend std::ostream& operator<<(std::ostream& os, const Car& obj);
+    friend std::istream& operator>>(std::istream& is, Car& obj);
 };
+
+
 
 #endif /* Car_h */

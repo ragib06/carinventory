@@ -19,19 +19,14 @@ CarFile::CarFile(String filename) {
 
 //Load and return car instance from file
 Car* CarFile::loadCarFromFile() {
-    char buffer[256] = "";
-    char linebuf[80];
     
     _ifs.open (_filename.string(), ifstream::in);
     
-    while(_ifs >> linebuf) {
-        strcat(buffer, linebuf);
-        strcat(buffer, "\n");
-    }
-    
+    Car * car = new Car;
+    _ifs >> *car;
     _ifs.close();
-    
-    return Car::fromString(buffer);
+
+    return car;
 }
 
 //store car instance into corresponding file
@@ -44,7 +39,7 @@ void CarFile::storeCarToFile(Car* car) {
     remove(_filename.string());
     
     _ofs.open (_filename.string(), ofstream::out);
-    _ofs << car->toString().string();
+    _ofs << *car;
     _ofs.close();
     
 }

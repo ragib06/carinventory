@@ -7,12 +7,8 @@
 //
 
 #include <iostream>
-//#include <vector>
 #include "Inventory.h"
 #include "String.h"
-//#include "Date.h"
-//#include "Car.h"
-//#include "CarFile.h"
 using namespace std;
 
 void test();
@@ -28,9 +24,12 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
+
+
 String foo() {
     String res;
-    res = "hihi";
+    cin >> res;
+//    res = "hihi";
     return res;
 }
 
@@ -40,18 +39,18 @@ void test() {
     
     String str = foo();
     
-    cout << "str: " << str.string() << endl;
+    cout << "str: " << str << endl;
 
-    String sa1 = "";
-    String sa2 = "hi";
-    String sa3 = "hello";
-    String sa4 = "bye";
-    String nl = "\n";
-    sa1 += sa2 + "\n";
-    sa1 += sa3 + "\n";
-    sa1 += sa4 + "\n";
-    
-    cout << sa1.string() << endl;
+//    String sa1 = "";
+//    String sa2 = "hi";
+//    String sa3 = "hello";
+//    String sa4 = "bye";
+//    String nl = "\n";
+//    sa1 += sa2 + "\n";
+//    sa1 += sa3 + "\n";
+//    sa1 += sa4 + "\n";
+//    
+//    cout << sa1.string() << endl;
     
     
 //    String s1;

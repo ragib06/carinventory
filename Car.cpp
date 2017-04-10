@@ -81,59 +81,45 @@ String Car::picture() const{
     return *_picture;
 }
 
-//Return a string representation of the Car instance
-String Car::toString() {
-    String str;
-    str = "";
+
+
+std::ostream& operator<<(std::ostream& os, const Car& obj) {
+    os << obj.cid() << std::endl;
+    os << obj.year() << std::endl;
+    os << obj.date() << std::endl;
+    os << obj.cost() << std::endl;
+    os << obj.make() << std::endl;
+    os << obj.model() << std::endl;
+    os << obj.picture() << std::endl;
     
-    char buffer[10];
-    
-    sprintf(buffer, "%d", _id);
-    str = str + buffer + "\n";
-    
-    sprintf(buffer, "%d", _year);
-    str = str + buffer + "\n";
-    
-    str = str + _date.toString() + "\n";
-    
-    sprintf(buffer, "%.2lf", _cost);
-    str = str + buffer + "\n";
-    
-    str = str + *_make + "\n";
-    
-    str = str + *_model + "\n";
-    
-    str = str + *_picture;
-    
-    return str;
+    return os;
 }
 
-//Build a Car instance from a given string representation
-Car* Car::fromString(String carString) {
-    int numTokens = carString.tokenCount("\n");
-    String** tokens = new String*[numTokens];
-    carString.tokenize("\n", tokens, numTokens);
+std::istream& operator>>(std::istream& is, Car& obj) {
+    String buffer;
     
-    if(numTokens != 7) {
-        return NULL;
-    }
+    is >> buffer;
+    obj._id = buffer.toInt();
     
-    int cid;
-    int year;
-    double cost;
+    is >> buffer;
+    obj._year = buffer.toInt();
     
-    sscanf(tokens[0]->string(), "%d", &cid);
-    sscanf(tokens[1]->string(), "%d", &year);
-    Date date = Date::fromString(*tokens[2]);
-    sscanf(tokens[3]->string(), "%lf", &cost);
+//    is >> buffer;
+//    obj._date = Date::fromString(buffer);
+    obj._date = Date();
+    is >> obj._date;
     
-    Car* car = new Car(cid, year, date, cost, tokens[4], tokens[5], tokens[6]);
+    is >> buffer;
+    obj._cost = buffer.toDouble();
     
-    for(int i = 0; i < numTokens; i++) {
-        delete tokens[i];
-    }
+    obj._make = new String();
+    is >> *obj._make;
     
-    delete[] tokens;
-
-    return car;
+    obj._model = new String();
+    is >> *obj._model;
+    
+    obj._picture = new String();
+    is >> *obj._picture;
+    
+    return is;
 }

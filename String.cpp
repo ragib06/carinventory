@@ -71,31 +71,6 @@ size_t String::size() const {
     return strlen(_string);
 }
 
-int String::tokenCount(const char* delimeter) {
-    int count = 0;
-    
-    String temp(_string);
-    char *token = strtok(temp.string(), delimeter);
-    
-    while(token != NULL) {
-        count++;
-        token = strtok(NULL, delimeter);
-    }
-    
-    return count;
-}
-
-void String::tokenize(const char* delimeter, String** tokens, int numTokens) {
-    
-    String temp(_string);
-    char *token = strtok(temp.string(), delimeter);
-    
-    int i = 0;
-    while(token != NULL && i < numTokens) {
-        tokens[i++] = new String(token);
-        token = strtok(NULL, delimeter);
-    }
-}
 
 
 
@@ -117,7 +92,9 @@ String& String::operator=(const String& rhs) {
 
 String& String::operator=(const char* str) {
     
-    delete[] _string;
+    if(_string != NULL) {
+        delete[] _string;
+    }
     
     _size = strlen(str);
     _string = new char[_size + 1];
@@ -186,4 +163,34 @@ String& String::operator+=(const String& rhs) {
     _string = temp;
     
     return *this;
+}
+
+std::ostream& operator<<(std::ostream& os, const String& obj) {
+    os << obj.string();
+    return os;
+}
+
+std::ifstream& operator>>(std::ifstream& isf, String& obj) {
+    
+    long long off = isf.tellg();
+    isf.seekg (0, isf.end);
+    
+    long long length = isf.tellg();
+    isf.seekg (off, isf.beg);
+    
+    char *buffer = new char[length + 1];
+    isf >> buffer;
+    obj = buffer;
+    delete[] buffer;
+    
+    return isf;
+}
+
+std::istream& operator>>(std::istream& is, String& obj) {
+    
+    char buffer[80];
+    is >> buffer;
+    obj = buffer;
+    
+    return is;
 }

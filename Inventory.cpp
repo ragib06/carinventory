@@ -23,31 +23,26 @@ bool Inventory::CreateCar() {
     cout << "Enter year: ";
     cin >> year;
     
-    int date_m, date_d, date_y;
+    Date date;
     cout << "Enter date(mm/dd/yy): ";
-    scanf("%d/%d/%d", &date_m, &date_d, &date_y);
-    Date date(date_m, date_d, date_y);
+    cin >> date;
     
     double cost;
     cout << "Enter price: ";
     cin >> cost;
     
-    char _make[40];
-    char _model[40];
-    char _picture[40];
+    String make;
+    String model;
+    String picture;
     
     cout << "Enter make: ";
-    cin >> _make;
+    cin >> make;
     
     cout << "Enter model: ";
-    cin >> _model;
+    cin >> model;
     
     cout << "Enter picture: ";
-    cin >> _picture;
-    
-    String make(_make);
-    String model(_model);
-    String picture(_picture);
+    cin >> picture;
     
     _container[_count++].initCar(year, date, cost, &make, &model, &picture);
     
@@ -63,11 +58,11 @@ void Inventory::ListCars() {
         cout << "====================" << endl;
         cout << "Car ID         : " << cid << endl;
         cout << "Car Year       : " << _container[i]->year() << endl;
-        cout << "Car Date       : " << _container[i]->date().toString().string() << endl;
+        cout << "Car Date       : " << _container[i]->date() << endl;
         cout << "Car Cost       : " << _container[i]->cost() << endl;
-        cout << "Car Make       : " << _container[i]->make().string() << endl;
-        cout << "Car Model      : " << _container[i]->model().string() << endl;
-        cout << "Car Picture    : " << _container[i]->picture().string() << endl;
+        cout << "Car Make       : " << _container[i]->make() << endl;
+        cout << "Car Model      : " << _container[i]->model() << endl;
+        cout << "Car Picture    : " << _container[i]->picture() << endl;
     }
 }
 

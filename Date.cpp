@@ -22,17 +22,18 @@ Date::Date(int month, int day, int year) : _month(month), _day(day), _year(year)
 }
 
 
-String Date::toString() {
-    
-    char buffer[10];
-    sprintf(buffer, "%d/%d/%d", _month, _day, _year);
-    
-    return String(buffer);
+std::ostream& operator<<(std::ostream& os, const Date& obj) {
+    os << obj._month << "/" << obj._day << "/" << obj._year;
+    return os;
 }
 
-Date Date::fromString(String dateString) {
-    int m, d, y;
-    sscanf(dateString.string(), "%d/%d/%d", &m, &d, &y);
+std::istream& operator>>(std::istream& is, Date& obj) {
+    char c;
+    is >> obj._month;
+    is >> c;
+    is >> obj._day;
+    is >> c;
+    is >> obj._year;
     
-    return Date(m, d, y);
+    return is;
 }

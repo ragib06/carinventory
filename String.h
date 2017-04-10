@@ -8,6 +8,7 @@
 
 #include <cstdlib>
 #include <cstring>
+#include <fstream>
 
 #ifndef String_hpp
 #define String_hpp
@@ -27,9 +28,6 @@ public:
     double toDouble() const;
     size_t size() const;
     
-    int tokenCount(const char* delimeter);
-    void tokenize(const char* delimeter, String** tokens, int numTokens);
-    
     String& operator=(const String& rhs);
     String& operator=(const char* str);
     
@@ -37,6 +35,12 @@ public:
     String operator+(const char* str);
     
     String& operator+=(const String& rhs);
+    
+    friend std::ostream& operator<<(std::ostream& os, const String& obj);
+    friend std::istream& operator>>(std::istream& is, String& obj);
+    friend std::ifstream& operator>>(std::ifstream& isf, String& obj);
 };
+
+
 
 #endif /* String_hpp */
